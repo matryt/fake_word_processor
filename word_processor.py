@@ -87,7 +87,7 @@ root.title("Text Editor")
 
 
 root.minsize(width=800, height=600)
-root.maxsize(width=800, height=600)
+root.maxsize(width=1920, height=1080)
 
 text = Text(root, width=500, height=600, bg="white", fg="black")
 text.pack()
