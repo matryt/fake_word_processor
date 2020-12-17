@@ -44,30 +44,36 @@ def openFile():
     file.close()
 
 
-fname = 'second'
+fname = 'test.txt'
 
-
-numlines = 0
-numwords = 0
-numchars = 0
-numparagraph = 0
-
-
-with open(fname, 'rb+') as k:
-    for line in k.readlines():
-        if line in ('\n', '\r\n'):
-            if numlines == 0:
-                numparagraph = numparagraph + 1
-            numlines = numlines + 1
-        else:
-            numlines = 0
-        words = line.split()
-        numlines += 1
-        numwords += len(words)
-        numchars += len(line)
+def compter():
+    numparagraphs = 0
+    numlines = 0
+    numwords = 0
+    numchars = 0
+    with open(fname, 'rb+') as k:
+        for line in k.readlines():
+            if line in ('\n', '\r\n'):
+                if numlines == 0:
+                    numparagraphs = numparagraphs + 1
+                for a in line:
+                    if a==' ':
+                        numwords+=1
+                numlines = numlines + 1
+            else:
+                numlines = 0
+            words = line.split()
+            numwords+=1
+            numlines += 1
+            numchars += len(line)
+        return numparagraphs, numlines, numwords, numchars
 
 
 def printWordCount():
+    a=text.get(0.0)
+    """for i """
+    numparagraph, numlines, numwords, numchars = compter()
+    text.insert(index="end", chars=str(" " + str(numwords) + " caractères."))
     print(numwords)
 
 
@@ -87,11 +93,11 @@ root.title("Text Editor")
 
 
 root.minsize(width=800, height=600)
-root.maxsize(width=1920, height=1080)
+root.maxsize(width=1366, height=768)
 
 text = Text(root, width=500, height=600, bg="white", fg="black")
 text.pack()
-
+comptagemots=Label(root)
 menu = Menu(root)
 root.config(menu=menu)
 
@@ -111,6 +117,4 @@ toolbar.add_command(label="Character Count", command=printCharCount)
 toolbar.add_command(label="Paragraph Count", command=printParaCount)
 toolbar.add_command(label="Line Count", command=printLineCount)
 menu.add_cascade(label="Tools", menu=toolbar)
-
-
 root.mainloop()
